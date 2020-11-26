@@ -1,0 +1,11 @@
+styles
+templates
+pandoc-scholar
+outfile.enriched.json
+*.docx
+*.docx#
+*.pdf
+*.latex
+*.bib
+*.bib.sav
+*.bib.bak
