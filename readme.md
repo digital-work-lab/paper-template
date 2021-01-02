@@ -29,3 +29,8 @@ make
 # Manuscript development guidelines:
 # https://github.com/geritwagner/manuscript-guidelines
 ```
+
+
+# Pre-submission checks
+
+[Pre-submission checks](https://github.com/geritwagner/manuscript-guidelines/blob/main/pre-submission-checklist.md)
