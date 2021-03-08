@@ -1,17 +1,12 @@
 ---
 title: "Manuscript template"
-author: "Gerit Wagner, ..."
+author: "Author 1, Author 2, ..."
 project:
   abbreviation: short-title
   manuscriptrepository: https://github.com/...
   datarepository: https://github.com/...
-abstract: >
-  Include the abstract.
-keywords: "Keyword 1; keyword 2."
 acknowledgments: "Acknowledge feedback from x"
 funding: "Received funding from x"
-bibliography: references.bib
-csl: /styles/mis-quarterly.csl
 link-citations: false
 figPrefix: "Figure"
 tblPrefix: "Table"
@@ -19,11 +14,18 @@ tblPrefix: "Table"
 
 # Abstract
 
-This is an example article.
+**Keywords**: keyword 1; keyword 2.
 
-**Keywords:** Term1, term2.
+# Introduction
 
-[@Webster2002]
+# Background
 
+# Methodology
+
+# Findings
+
+# Discussion
+
+# Conclusion
 
 # References

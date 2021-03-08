@@ -1,51 +1,59 @@
-DOCX_REFERENCE_DOC = --reference-doc=/templates/APA-7.docx
-LATEX_REF_DOC = --template=/templates/default.latex
+DOCX_REFERENCE_DOC = --reference-doc=/templates/ICIS2021.docx
+LATEX_REF_DOC = --template=/templates/basic.tex
+CSL_FILE = --csl=/styles/mis-quarterly.csl
+BIBLIOGRAPHY_FILE = --bibliography=/bibliography/references.bib
+# The parameters should be in the same document (ideally in the YAML header of paper.md).
+# We will keep them in the Makefile until template and reference-doc can be set in the YAML header.
+# https://github.com/jgm/pandoc/issues/4627
 
-PANDOC_CALL = docker run --rm --volume "`pwd`:/data" -v $(shell readlink ./styles):/styles/ -v $(shell readlink ./templates):/templates/ --user `id -u`:`id -g` pandoc_dockerfile
-# Alternative: run locally
-# PANDOC_CALL = pandoc
-# Alternative: run specific version (pandoc/ubuntu-latex)
-# PANDOC_VERSION = 2.11.2
-#PANDOC_CALL = docker run --rm --volume "`pwd`:/data" -v $(shell readlink ./styles):/styles/ -v $(shell readlink ./templates):/templates/ --user `id -u`:`id -g` pandoc/ubuntu-latex:$(PANDOC_VERSION)
+.PHONY : run pdf docx install
 
-BIBLIOGRAPHY_FILE = $(wildcard *.bib)
+help :
+	@echo "Usage: make [command]"
+	@echo "    help"
+	@echo "        Show this help description"
+	@echo "    run"
+	@echo "        Run analyses of the complete repository"
+	@echo "    analyses"
+	@echo "        Run all analyses"
+	@echo "    pdf"
+	@echo "        Generate manuscript pdf"
+	@echo "    docx"
+	@echo "        Generate manuscript docx"
 
-run: pdf docx
+run : pdf docx
+
+PANDOC_CALL = docker run --rm --volume "`pwd`:/data" -v $(shell readlink -f ./styles):/styles/ -v $(shell readlink -f ./templates):/templates/ -v $(shell readlink -f ./bibliography):/bibliography/  --user `id -u`:`id -g` pandoc_dockerfile
 
 pdf:
-	rm -f ./references_copy.bib && \
-	cp -Lr ./$(BIBLIOGRAPHY_FILE) ./references_copy.bib && \
-	$(PANDOC_CALL) paper.md	\
-	 	--filter pandoc-crossref \
-		--citeproc \
-		--bibliography=references_copy.bib \
-		$(LATEX_REF_DOC) \
-		--pdf-engine=xelatex \
-		-o outfile.pdf && \
-	rm ./references_copy.bib
-
-docx:
-	rm -f ./references_copy.bib && \
-	cp -Lr ./$(BIBLIOGRAPHY_FILE) ./references_copy.bib && \
 	$(PANDOC_CALL) paper.md \
 		--filter pandoc-crossref \
 		--citeproc \
-		--bibliography=references_copy.bib \
+		$(BIBLIOGRAPHY_FILE) \
+		$(CSL_FILE) \
+		$(LATEX_REF_DOC) \
+		--pdf-engine=xelatex \
+		-o outfile.pdf
+
+docx:
+	$(PANDOC_CALL) paper.md \
+		--filter pandoc-crossref \
+		--citeproc \
+		$(BIBLIOGRAPHY_FILE) \
+		$(CSL_FILE) \
 		$(DOCX_REFERENCE_DOC) \
-		-o outfile.docx && \
-	rm ./references_copy.bib
+		-o outfile.docx
 
 install:
-	cd ..
-	git clone https://github.com/citation-style-language/styles
-	git clone https://github.com/geritwagner/templates
-	cd ../theory-elaboration-manuscript
-	ln -s ../styles styles
-	ln -s ../templates templates
+	git clone https://github.com/geritwagner/bibliography ../bibliography
+	git clone https://github.com/citation-style-language/styles ../styles
+	git clone https://github.com/geritwagner/templates ../templates
+	ln -s ../styles
+	ln -s ../templates
+	ln -s ../bibliography
 	# For gitinfo2:
-	cd .git/hooks
-	cp /usr/share/texlive/texmf-dist/tex/latex/gitinfo2/post-xxx-sample.txt post-checkout
-	cp post-checkout post-merge
-	cp post-checkout post-commit
-	cd ../..
+	cp /usr/share/texlive/texmf-dist/tex/latex/gitinfo2/post-xxx-sample.txt .git/hooks/post-checkout
+	cp .git/hooks/post-checkout .git/hooks/post-merge
+	cp .git/hooks/post-checkout .git/hooks/post-commit
 	docker build -t pandoc_dockerfile .
+	docker build -t wur_rstudio ./analysis
