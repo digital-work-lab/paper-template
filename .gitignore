@@ -1,11 +1,7 @@
 styles
 templates
-pandoc-scholar
-outfile.enriched.json
+bibliography
 outfile.docx
 outfile.docx#
 outfile.pdf
 outfile.latex
-*.bib
-*.bib.sav
-*.bib.bak
