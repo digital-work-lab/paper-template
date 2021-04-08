@@ -36,13 +36,11 @@ git branch -M main
 git push -u origin main
 
 # once the repo has been set up, replace url_to_this_repository in the following lines and delete the preceding lines.
-# Requirements: make, docker
 # To install
 make install
 # To build simply run make:
-make
-# Manuscript development guidelines:
-# https://github.com/geritwagner/manuscript-guidelines
+make pdf
+make docx
 ```
 
 # Repository structure
@@ -189,7 +187,7 @@ git branch -d iss12
 
 - Pull-rebase to avoid unnecessary merge commits (when having worked concurrently):
 ```
-git pull --rebase-merges
+git pull --rebase
 ```
 
 ## Collaboration with Word users
@@ -225,36 +223,30 @@ This checklist can be used to produce camera-ready manuscripts (initials submiss
 ## Template and Formatting
 - [ ] Check Metadata (Authors, Title, ...)
 - [ ] Used the correct template from the journal website? This might require an additional, external checklist.
+- [ ] Remove double-spaces
 - [ ] Page limit?
-- [ ] Consistent use of font sizes, types (also in figures, tables)
+- [ ] Consistent use of font sizes, types in figures and tables
 - [ ] Alignment of Headings etc.
-- [ ] Consistent line spacing
 - [ ] Abbreviations introduced AND consistently used (except in titles/captions/figures/tables?)
 - [ ] Formatting of footnotes
 - [ ] Check references to Figures, Tables and Appendices
-- [ ] Double-spaces?
 - [ ] Text-alignment/blocks (for all paragraphs)
 - [ ] Consistent capitalization (headings, captions, ...)
 - [ ] Consistent terminology (e.g., paper vs. article)
-- [ ] Word: Check field references to appendices/figures: accidentally included the title?
 - [ ] Use the same decimal separator throughout the manuscript (. or ,)
 - [ ] Word: Check non-print characters (ctrl+shift+r)
-- [ ] Include a ^TM for registered trademarks
 
 ## Spelling
-- [ ] Export PDF as docx & spell-check
+- [ ] Spell-check in Word
 - [ ] Tempus (Methodology: simple past)
 - [ ] , which/who
 - [ ] i.e., e.g., (with comma)
 - [ ] a vs. an.  A well known grammar rule says that we should use an before vowel sounds; for example, an accident, an item, an hour. We use a otherwise: a book, a hotel, a university.  Notice that we say an hour, not a hour. The choice of a or an is based upon the sound of the word, not the spelling. Hour sounds as if it starts with a vowel sound (ow); hence, we use an. Following this rule, we would say a historic, not an historic because   (for most speakers) historic doesn't start with a vowel sound. Words of three or more syllables that start with h are treated differently by some speakers, though. (This may be because of the tendency of some regional accents to drop initial Hs.) You only use an when the following sound is a vowel — that you should only look at the letter is a misconception. For example, you would say an hour but a horse, etc.
 - [ ] "to the best of our knowledge", not "to our best knowledge"
-- [ ] Above-mentioned (UK) vs. abovementioned (US)
-- [ ] Critcism/critique vs. “critic” (this is a person).
 
 ## Tables and Figures
 - [ ] Are your figures/tables self-contained? You should be able to read the article without looking at the figures/tables and vice versa.
 - [ ] Have you uploaded any lengthy tables as supplementary files for online publication?
-- [ ] Search manuscript for "Verweisquelle"
 - Tables:
   - [ ] Alignment of decimals
   - [ ] Have you provided appropriate table legends?
@@ -283,17 +275,21 @@ This checklist can be used to produce camera-ready manuscripts (initials submiss
  - [ ] Consistent use of "Anonymous" instead of clear author name (if blinding is required)
  - [ ] Remove personal information from Word file: File, Info, Inspect Document, Check for Issues, Inspect Document, Document Properties and Personal Information, Inspect, Document Properties and Personal Information, Remove All
  - [ ] Latex: Check if .tex writes metadata to PDF (final version, not for submissions/revisions):
-      \usepackage[pdftitle={Title of the paper}, pdfauthor={Gerit Wagner, Ross J. Anderson}, pdfkeywords={data security, eavesdropping}]{hyperref}
+
+ ```
+ \usepackage[pdftitle={Title of the paper}, pdfauthor={AuthorName FamilyName, AuthorName FamilyName}, pdfkeywords={keyword1, keyword2}]{hyperref}
+ ```
  - [ ] Search manuscript for "reference" (to catch notes like ("reference needed"))
  - [ ] Check references (correctly cited? separated by semicolons?)
 
 ## Markdown
--  check external papers/tables and include references
-- add to yaml header:
+- Check external papers/tables and include references
+- Add to yaml header:
 ```
 nocite: |
   @Webster2002
 ```
+
 ## FINAL CHECKS
 - [ ] Compare with previous version to catch accidental changes (Word: Check, Compare documents)
 - [ ] Check the PDF. There might be problems when creating the PDF from the word document.
