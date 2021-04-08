@@ -1,7 +1,7 @@
-DOCX_REFERENCE_DOC = --reference-doc=/templates/ICIS2021.docx
-LATEX_REF_DOC = --template=/templates/basic.tex
-CSL_FILE = --csl=/styles/mis-quarterly.csl
-BIBLIOGRAPHY_FILE = --bibliography=/bibliography/references.bib
+DOCX_REFERENCE_DOC = --reference-doc /templates/ICIS2021.docx
+LATEX_REF_DOC = --template /templates/basic.tex
+CSL_FILE = --csl /styles/mis-quarterly.csl
+BIBLIOGRAPHY_FILE = --bibliography /bibliography/references.bib
 # The parameters should be in the same document (ideally in the YAML header of paper.md).
 # We will keep them in the Makefile until template and reference-doc can be set in the YAML header.
 # https://github.com/jgm/pandoc/issues/4627
@@ -23,26 +23,28 @@ help :
 
 run : pdf docx
 
-PANDOC_CALL = docker run --rm --volume "`pwd`:/data" -v $(shell readlink -f ./styles):/styles/ -v $(shell readlink -f ./templates):/templates/ -v $(shell readlink -f ./bibliography):/bibliography/  --user `id -u`:`id -g` pandoc_dockerfile
+PANDOC_CALL = docker run --rm --volume "`pwd`:/data" --volume$(shell readlink -f ./styles):/styles/ --volume$(shell readlink -f ./templates):/templates/ --volume$(shell readlink -f ./bibliography):/bibliography/  --user `id -u`:`id -g` pandoc_dockerfile
 
 pdf:
-	$(PANDOC_CALL) paper.md \
+	$(PANDOC_CALL) \
+		paper.md \
 		--filter pandoc-crossref \
 		--citeproc \
 		$(BIBLIOGRAPHY_FILE) \
 		$(CSL_FILE) \
 		$(LATEX_REF_DOC) \
-		--pdf-engine=xelatex \
-		-o outfile.pdf
+		--pdf-engine xelatex \
+		--output outfile.pdf
 
 docx:
-	$(PANDOC_CALL) paper.md \
+	$(PANDOC_CALL) \
+		paper.md \
 		--filter pandoc-crossref \
 		--citeproc \
 		$(BIBLIOGRAPHY_FILE) \
 		$(CSL_FILE) \
 		$(DOCX_REFERENCE_DOC) \
-		-o outfile.docx
+		--output outfile.docx
 
 install:
 	git clone https://github.com/geritwagner/bibliography ../bibliography
