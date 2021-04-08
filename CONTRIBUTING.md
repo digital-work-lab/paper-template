@@ -79,7 +79,6 @@ Figures can be included as follows and referred to as @fig:distribution.
 
 ```
 ![Figure Caption](figure.jpg){#fig:distribution width=300px}
-
 ```
 
 To add papers that are cited in the figure to the reference section, include the following in the YAML header of paper.md:

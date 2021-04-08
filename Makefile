@@ -23,7 +23,13 @@ help :
 
 run : pdf docx
 
-PANDOC_CALL = docker run --rm --volume "`pwd`:/data" --volume$(shell readlink -f ./styles):/styles/ --volume$(shell readlink -f ./templates):/templates/ --volume$(shell readlink -f ./bibliography):/bibliography/  --user `id -u`:`id -g` pandoc_dockerfile
+PANDOC_CALL = docker run --rm \
+	--volume "`pwd`:/data" \
+	--volume$(shell readlink -f ./styles):/styles/ \
+	--volume$(shell readlink -f ./templates):/templates/ \
+	--volume$(shell readlink -f ./bibliography):/bibliography/ \
+	--user `id -u`:`id -g` \
+	pandoc_dockerfile
 
 pdf:
 	$(PANDOC_CALL) \
