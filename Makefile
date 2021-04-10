@@ -25,9 +25,9 @@ run : pdf docx
 
 PANDOC_CALL = docker run --rm \
 	--volume "`pwd`:/data" \
-	--volume$(shell readlink -f ./styles):/styles/ \
-	--volume$(shell readlink -f ./templates):/templates/ \
-	--volume$(shell readlink -f ./bibliography):/bibliography/ \
+	--volume $(shell readlink -f ./styles):/styles/ \
+	--volume $(shell readlink -f ./templates):/templates/ \
+	--volume $(shell readlink -f ./bibliography):/bibliography/ \
 	--user `id -u`:`id -g` \
 	pandoc_dockerfile
 
@@ -64,4 +64,3 @@ install:
 	cp .git/hooks/post-checkout .git/hooks/post-merge
 	cp .git/hooks/post-checkout .git/hooks/post-commit
 	docker build -t pandoc_dockerfile .
-	docker build -t wur_rstudio ./analysis
