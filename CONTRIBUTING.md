@@ -151,17 +151,13 @@ A useful possibility is to include comments throughout the markdown document
 <!-- This is a comment (adding further explanations, links to resources or parts of the manuscripts that were shortened)-->
 
 
-Formatting the bibliography
+Formatting the bibliography (*.bib file)
 
-- Journal abbreviations: cf. templates/readme.md # Bibliography: journal abbreviations
-- Title capitalization: do not capitalize title in the bib-file. This is controlled by the text-case in the CSL file:
-```
-<text variable="title" suffix="," text-case="title"/>
-```
+- Title field: use sentence case (e.g., "On the origin of species", not "On the Origin of Species"). CSL styles that require title case will use an automatic title-case conversion ([1](https://citationstyles.org/authors/#/titles-in-sentence-and-title-case)).
 
-Note: when using crossrefs for inproceedings, the year and month field should not be set, only the original \@Proceedings entry should include the date formatted as follows:
-date    = {2015-12-13/2015-12-16},
+- Journal field: use long version (e.g., "Journal of Information Technology", not "JIT"). For CSL styles that require abbreviations, temporarily replace the journal field in the bib-file since CSL does not handle journal-specific abbreviations ([1](https://citationstyles.org/authors/#/csl-limitations)). Instructions for JabRef are available [here](https://docs.jabref.org/advanced/journalabbreviations).
 
+- Inproceedings: when using crossrefs (e.g., `crossref = {icis2010}`) for conference papers, the year and month field should _not_ be set, only the original \@Proceedings entry should include the date formatted as follows: `date    = {2015-12-13/2015-12-16}`.
 
 # Workflow
 
