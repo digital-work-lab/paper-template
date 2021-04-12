@@ -1,12 +1,18 @@
+# To use local instead of shared versions, replace the following and use the code in comments
 DOCX_REFERENCE_DOC = --reference-doc /templates/ICIS2021.docx
+# DOCX_REFERENCE_DOC = --reference-doc APA-7.docx
 LATEX_REF_DOC = --template /templates/basic.tex
+# LATEX_REF_DOC = --template basic.tex
 CSL_FILE = --csl /styles/mis-quarterly.csl
+# CSL_FILE = --csl mis-quarterly.csl
 BIBLIOGRAPHY_FILE = --bibliography /bibliography/references.bib
+# BIBLIOGRAPHY_FILE = --bibliography references.bib
+
 # The parameters should be in the same document (ideally in the YAML header of paper.md).
 # We will keep them in the Makefile until template and reference-doc can be set in the YAML header.
 # https://github.com/jgm/pandoc/issues/4627
 
-.PHONY : run pdf docx install
+.PHONY : run pdf docx
 
 help :
 	@echo "Usage: make [command]"
@@ -51,16 +57,3 @@ docx:
 		$(CSL_FILE) \
 		$(DOCX_REFERENCE_DOC) \
 		--output outfile.docx
-
-install:
-	git clone https://github.com/geritwagner/bibliography ../bibliography
-	git clone https://github.com/citation-style-language/styles ../styles
-	git clone https://github.com/geritwagner/templates ../templates
-	ln -s ../styles
-	ln -s ../templates
-	ln -s ../bibliography
-	# For gitinfo2:
-	cp /usr/share/texlive/texmf-dist/tex/latex/gitinfo2/post-xxx-sample.txt .git/hooks/post-checkout
-	cp .git/hooks/post-checkout .git/hooks/post-merge
-	cp .git/hooks/post-checkout .git/hooks/post-commit
-	docker build -t pandoc_dockerfile .
