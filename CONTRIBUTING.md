@@ -107,15 +107,14 @@ It can be edited using tools like [JabRef](https://github.com/JabRef/jabref).
 It is recommended to configure save actions to [store titles as sentence case](https://docs.jabref.org/finding-sorting-and-cleaning-entries/saveactions#sentence-case), [normalize names of persons for author fields](https://docs.jabref.org/finding-sorting-and-cleaning-entries/saveactions#normalize-names-of-persons), and to [normalize page numbers](https://docs.jabref.org/finding-sorting-and-cleaning-entries/saveactions#normalize-page-numbers).
 Changes in the bib-file should be checked before committing and adding {} to protect cases when necessary (e.g., `{J}ab{R}ef`).
 
+A very useful possibility is to include comments throughout the markdown document:
+
+```
+<!-- This is a comment (adding further explanations, links to resources or parts of the manuscripts that were shortened)-->
+```
+
 Papers are cited using the citation keys in the bib-file and the citation syntax @Webster2002 or [@Webster2002].
-
 Groups of in-text citations should be sorted alphabetically (especially if a prefix is used), i.e., use [e.g., @Bacharach1989; @Gregor2006a] instead of [e.g., @Gregor2006a; @Bacharach1989].
-
-Figures can be included as follows and referred to as @fig:distribution.
-
-```
-![Figure Caption](figure.jpg){#fig:distribution width=300px}
-```
 
 To add papers that are cited in the figure to the reference section, include the following in the YAML header of paper.md:
 
@@ -124,9 +123,17 @@ nocite: |
   @citation_key
 ```
 
+Further Information on the [citation syntax](https://pandoc.org/MANUAL.html#citation-syntax) is available in the pandoc manual.
+
+Figures can be included as follows and referred to as @fig:distribution.
+Further information on [pandoc-crossref](https://lierdakil.github.io/pandoc-crossref/) is available online.
+
+```
+![Figure Caption](figure.jpg){#fig:distribution width=300px}
+```
+
 To ensure compatibility with pandoc word and latex conversion, figures should be included as jpg/png.
 For the final versions, PDFs/EMFs should be included for Latex/Word respectively.
-
 
 Describe newline best-practice
 
@@ -161,16 +168,12 @@ Footnotes can be added [^1].
 
   [^1]: Example footnote.
 
-A useful possibility is to include comments throughout the markdown document
-
-<!-- This is a comment (adding further explanations, links to resources or parts of the manuscripts that were shortened)-->
-
 
 Formatting the bibliography (*.bib file)
 
 - Title field: use sentence case (e.g., "On the origin of species", not "On the Origin of Species"). CSL styles that require title case will use an automatic title-case conversion ([1](https://citationstyles.org/authors/#/titles-in-sentence-and-title-case)).
 
-- Journal field: use long version (e.g., "Journal of Information Technology", not "JIT"). For CSL styles that require abbreviations, temporarily replace the journal field in the bib-file since CSL does not handle style-specific journal abbreviations ([1](https://citationstyles.org/authors/#/csl-limitations)). Instructions for JabRef are available [here](https://docs.jabref.org/advanced/journalabbreviations).
+- Journal field: use long version (e.g., "Journal of Information Technology", not "JIT"). For CSL styles that require abbreviations, temporarily replace the journal field in the bib-file since CSL does not handle style-specific journal abbreviations ([1](https://citationstyles.org/authors/#/csl-limitations)). JSON-files containing journal abbreviations can be passed to pandoc using the [citation-abbreviations](https://pandoc.org/MANUAL.html#option--citation-abbreviations) field.
 
 - Inproceedings: when using crossrefs (e.g., `crossref = {icis2010}`) for conference papers, the year and month field should _not_ be set, only the original \@Proceedings entry should include the date formatted as follows: `date    = {2015-12-13/2015-12-16}`.
 
