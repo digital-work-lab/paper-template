@@ -2,12 +2,11 @@
 
 The manuscript development process is based on markdown, git, Docker, pandoc, and csl.
 The goal is to support the collaborative writing process effectively, building on powerful open source tools, and supporting efficient production of documents for submission.
-Underlying architectural principles and considerations are summarized in the [last section](#principles).
 
 - [Repository structure](#repository-structure)
 - [Setup](#setup)
-- [Editing the paper](#editing-the-paper)
 - [Workflow](#workflow)
+  - [Editing the paper](#editing-the-paper)
   - [Contributing changes](#contributing-changes)
   - [Retrieving changes from coauthors](#retrieving-changes-from-coauthors)
   - [Collaborating with Word users](#collaboration-with-word-users)
@@ -64,6 +63,7 @@ git commit -m 'initial commit'
 git remote add origin https://github.com/....
 git branch -M main
 git push -u origin main
+# MANUALLY invite coauthors/provide access to the remote repository
 ```
 
 1b) Contribute to an existing repository
@@ -94,7 +94,12 @@ make pdf
 make docx
 ```
 
-# Editing the paper
+# Workflow
+
+Changes are tracked by the collaborative versioning system git.
+Tutorials on git are available online ([1](https://learngitbranching.js.org/), [2](https://github.com/jlord/git-it-electron)).
+
+## Editing the paper
 
 The [paper](paper.md) is written in markdown.
 Several editors are available for markdown documents:
@@ -177,10 +182,6 @@ Formatting the bibliography (*.bib file)
 
 - Inproceedings: when using crossrefs (e.g., `crossref = {icis2010}`) for conference papers, the year and month field should _not_ be set, only the original \@Proceedings entry should include the date formatted as follows: `date    = {2015-12-13/2015-12-16}`.
 
-# Workflow
-
-Changes are tracked by the collaborative versioning system git.
-Tutorials on git are available online ([1](https://learngitbranching.js.org/), [2](https://github.com/jlord/git-it-electron)).
 
 ## Contributing changes
 
@@ -434,7 +435,7 @@ Example (copy and append at the end of readme.md)
 
 # Principles
 
-TODO: summarize architectural principles and considerations
+This section summarizes underlying architectural principles and considerations.
 
 Advantages of the markdown/pandoc workflow:
 
