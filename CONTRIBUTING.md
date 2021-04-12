@@ -91,6 +91,8 @@ Several editors are available for markdown documents:
 
 The bibliography is stored as a bib file and versioned in a git repository.
 It can be edited using tools like [JabRef](https://github.com/JabRef/jabref).
+It is recommended to configure save actions to [store titles as sentence case](https://docs.jabref.org/finding-sorting-and-cleaning-entries/saveactions#sentence-case), [normalize names of persons for author fields](https://docs.jabref.org/finding-sorting-and-cleaning-entries/saveactions#normalize-names-of-persons), and to [normalize page numbers](https://docs.jabref.org/finding-sorting-and-cleaning-entries/saveactions#normalize-page-numbers).
+Changes in the bib-file should be checked before committing and adding {} to protect cases when necessary (e.g., `{J}ab{R}ef`).
 
 Papers are cited using the citation keys in the bib-file and the citation syntax @Webster2002 or [@Webster2002].
 
@@ -155,7 +157,7 @@ Formatting the bibliography (*.bib file)
 
 - Title field: use sentence case (e.g., "On the origin of species", not "On the Origin of Species"). CSL styles that require title case will use an automatic title-case conversion ([1](https://citationstyles.org/authors/#/titles-in-sentence-and-title-case)).
 
-- Journal field: use long version (e.g., "Journal of Information Technology", not "JIT"). For CSL styles that require abbreviations, temporarily replace the journal field in the bib-file since CSL does not handle journal-specific abbreviations ([1](https://citationstyles.org/authors/#/csl-limitations)). Instructions for JabRef are available [here](https://docs.jabref.org/advanced/journalabbreviations).
+- Journal field: use long version (e.g., "Journal of Information Technology", not "JIT"). For CSL styles that require abbreviations, temporarily replace the journal field in the bib-file since CSL does not handle style-specific journal abbreviations ([1](https://citationstyles.org/authors/#/csl-limitations)). Instructions for JabRef are available [here](https://docs.jabref.org/advanced/journalabbreviations).
 
 - Inproceedings: when using crossrefs (e.g., `crossref = {icis2010}`) for conference papers, the year and month field should _not_ be set, only the original \@Proceedings entry should include the date formatted as follows: `date    = {2015-12-13/2015-12-16}`.
 
