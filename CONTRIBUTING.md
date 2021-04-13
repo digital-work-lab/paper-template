@@ -103,6 +103,7 @@ Tutorials on git are available online ([1](https://learngitbranching.js.org/), [
 ## Editing the paper
 
 The [paper](paper.md) is written in markdown.
+Useful guides on markdown are available online ([1](https://bookdown.org/yihui/rmarkdown/))
 Several editors are available for markdown documents:
 
 - [Atom](https://shd101wyy.github.io/markdown-preview-enhanced/#/)
@@ -451,6 +452,7 @@ Example (copy and append at the end of readme.md)
 ## Publication
 
 - [ ] Check and update metadata (authors, title, ...)
+- [ ] Include the keywords and abstract in the yaml header of [paper.md](paper.md).
 - [ ] Acknowledge support by a funding body, acknowledge colleagues, reviewers (e.g., "The authors are grateful to the three expert reviewers for their exceptional comments.")
 - [ ] Inform colleagues about the new publication
 - [ ] Add the publication record to your CV, [ORCID](https://orcid.org/), your [GoogleScholar](https://scholar.google.com/intl/de/scholar/citations.html) profile, institutional website, and personal website
