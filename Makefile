@@ -23,9 +23,9 @@ help :
 	@echo "    analyses"
 	@echo "        Run all analyses"
 	@echo "    pdf"
-	@echo "        Generate manuscript pdf"
+	@echo "        Generate paper pdf"
 	@echo "    docx"
-	@echo "        Generate manuscript docx"
+	@echo "        Generate paper docx"
 
 run : pdf docx
 
@@ -46,7 +46,7 @@ pdf:
 		$(CSL_FILE) \
 		$(LATEX_REF_DOC) \
 		--pdf-engine xelatex \
-		--output outfile.pdf
+		--output paper.pdf
 
 docx:
 	$(PANDOC_CALL) \
@@ -56,4 +56,4 @@ docx:
 		$(BIBLIOGRAPHY_FILE) \
 		$(CSL_FILE) \
 		$(DOCX_REFERENCE_DOC) \
-		--output outfile.docx
+		--output paper.docx
