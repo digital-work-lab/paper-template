@@ -10,9 +10,9 @@ The goal is to support the collaborative writing process effectively, building o
   - [Contributing changes](#contributing-changes)
   - [Retrieving changes from coauthors](#retrieving-changes-from-coauthors)
   - [Collaborating with Word users](#collaboration-with-word-users)
-  - [Pre-submission checklist](#pre-submission-checklist)
-  - [Revisions](#revision)
-  - [Publication](#publication)
+  - [Submitting the paper](#submitting-the-paper)
+  - [Revising the paper](#revising-the-paper)
+  - [Publishing the paper](#publishing-the-paper)
 - [Principles](#principles)
 
 # Repository structure
@@ -248,7 +248,7 @@ This can be useful to track the mapping between version numbers and the correspo
 
 - When receiving feedback in the docx: always make sure that feedback (including tracked and untracked changes) is transferred to the [paper](paper.md) manually.
 
-## Pre-submission checklist
+## Submitting the paper
 
 This checklist can be used to produce camera-ready manuscripts (initials submissions, revisions, and final versions).
 The checks should be completed in order (keep this in mind when updating this checklist).
@@ -378,7 +378,7 @@ nocite: |
 - [ ] Update personal paper portfolio
 - [ ] Thank co-authors/research-associates
 
-## Revision
+## Revising the paper
 
 1. Organize revision
 
@@ -449,7 +449,7 @@ Example (copy and append at the end of readme.md)
   Submitted [manuscript](YYYY-MM-DD-Journal_Manuscript_ID.pdf) and [revision sheet](YYYY-MM-DD-Journal_Revision_sheet_ID.pdf).
 
 
-## Publication
+## Publishing the paper
 
 - [ ] Check and update metadata (authors, title, ...)
 - [ ] Include the keywords and abstract in the yaml header of [paper.md](paper.md).
