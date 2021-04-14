@@ -36,12 +36,12 @@ Based on [cookiecutter data science](https://drivendata.github.io/cookiecutter-d
 │                    directory)
 ├── Dockerfile    <- describes the pandoc container for building the paper
 │                    (called by the Makefile)  
-├── paper.md      <- contains the paper
-├── readme.md     <- contains summaries of the paper's revisions (completed and
-│                    ongoing). Revision sheets are created from this document.
 ├── Makefile      <- contains instructions to build the paper (as pdf or docx),
 │                    and run the analyses (if a Makefile exists in the analysis
 │                    directory)
+├── paper.md      <- contains the paper
+├── readme.md     <- contains summaries of the paper's revisions (completed and
+│                    ongoing). Revision sheets are created from this document.
 └── .gitignore    <- contains a list of files that are excluded from git
                      versioning (e.g., paper.pdf, which would create conflicts
                      when merging changes)
