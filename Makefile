@@ -12,7 +12,7 @@ BIBLIOGRAPHY_FILE = --bibliography /bibliography/references.bib
 # We will keep them in the Makefile until template and reference-doc can be set in the YAML header.
 # https://github.com/jgm/pandoc/issues/4627
 
-.PHONY : run pdf docx
+.PHONY : run analyses pdf latex docx
 
 help :
 	@echo "Usage: make [command]"
@@ -24,10 +24,15 @@ help :
 	@echo "        Run all analyses"
 	@echo "    pdf"
 	@echo "        Generate paper pdf"
+	@echo "    pdf"
+	@echo "        Generate paper latex"
 	@echo "    docx"
 	@echo "        Generate paper docx"
 
-run : pdf docx
+run : analyses pdf latex docx
+
+analyses :
+	[ -f analysis/Makefile ] && $(MAKE) -C analysis run || true # Skip if no Makefile in analysis directory
 
 PANDOC_CALL = docker run --rm \
 	--volume "`pwd`:/data" \
@@ -47,6 +52,18 @@ pdf:
 		$(LATEX_REF_DOC) \
 		--pdf-engine xelatex \
 		--output paper.pdf
+
+latex:
+	$(PANDOC_CALL) \
+		paper.md \
+		--filter pandoc-crossref \
+		--citeproc \
+		$(BIBLIOGRAPHY_FILE) \
+		$(CSL_FILE) \
+		$(LATEX_REF_DOC) \
+		--to latex \
+		--pdf-engine xelatex \
+		--output paper.tex
 
 docx:
 	$(PANDOC_CALL) \

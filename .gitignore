@@ -4,4 +4,7 @@ bibliography
 paper.docx
 paper.docx#
 paper.pdf
-paper.latex
+paper.tex
+paper.aux
+paper.log
+paper.synctex.gz
