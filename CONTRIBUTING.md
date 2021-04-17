@@ -468,11 +468,15 @@ Example (copy and append at the end of readme.md)
 
 This section summarizes underlying architectural principles and considerations.
 
+- Minimal functionality: the most frequent use cases (writing, citing, creating submission files in docx/latex format with different templates and citation styles) must be supported in a highly efficient way.
+More complex functionality (such as tables with merged cells and detailed formatting) is used less frequently (requiring less effort if not supported in an efficient way).
+It may also create fewer problems (e.g., merging complex tables - as in Word/comparisons of tables)
+
 Advantages of the markdown/pandoc workflow:
 
 - Separation of content and format
 - Collaboration and versioning of text with git
-- [CSL](https://citationstyles.org/) standard
+- Relying on active open source projects such as the [CSL](https://citationstyles.org/) standard
 - Flexibility regarding the bibliography type (pandoc supports .bib, .enl, ...)
 - Combined writing and comments in the same document
 - Reproducibility across platforms
@@ -480,3 +484,5 @@ Advantages of the markdown/pandoc workflow:
 
 Since the underlying open source projects (especially CSL, pandoc, pandoc-citeproc) evolve constantly, it is recommended to work with the latest versions.
 This is a limitation of the popular [manubot project](https://github.com/manubot/rootstock) or [pandoc scholar](https://github.com/pandoc-scholar/pandoc-scholar), which work with old versions of pandoc (which may be hard to update).
+
+Possible extensions (lua-filters): [bibexport](https://github.com/pandoc/lua-filters/tree/master/bibexport), [abstract-to-meta](https://github.com/pandoc/lua-filters/tree/master/abstract-to-meta), [spellcheck](https://github.com/pandoc/lua-filters/tree/master/spellcheck), [wordcount](https://github.com/pandoc/lua-filters/tree/master/wordcount).
