@@ -31,7 +31,7 @@ help :
 
 run : analyses pdf latex docx
 
-analyses :
+analyses:
 	[ -f analysis/Makefile ] && $(MAKE) -C analysis run || true # Skip if no Makefile in analysis directory
 
 PANDOC_CALL = docker run --rm \

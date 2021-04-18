@@ -50,9 +50,6 @@ Based on [cookiecutter data science](https://drivendata.github.io/cookiecutter-d
 Optional: shared and symlinked directories
 
 To avoid handling redundant and possibly outdated files across paper projects, it is recommended to use shared bibliographies, shared templates, and the styles provided by the CSL community.
-Any of the bibliographies (\*.bib), templates (\*.docx, \*.tex), or styles (\*.csl) can also be versioned in the individual paper repository.
-This can be accomplished by using the code in comments at the beginning of the [Makefile](Makefile).
-Symlinks to shared directory are ignored in [git versioning](.gitignore).
 
 ```
 ├── bibliography  <- a symlink to the shared bibliography
@@ -60,6 +57,9 @@ Symlinks to shared directory are ignored in [git versioning](.gitignore).
 |                    https://github.com/citation-style-language/styles
 ├── templates     <- a symlink to the shared template repository
 ```
+Symlinks to shared directory are ignored in [git versioning](.gitignore).
+Any of the bibliographies (\*.bib), templates (\*.docx, \*.tex), or styles (\*.csl) can also be versioned in the individual paper repository.
+This can be accomplished by using the code in comments at the beginning of the [Makefile](Makefile).
 
 # Setup
 
@@ -74,13 +74,18 @@ The following steps describe how to
 
 1a) Create a new repository
 
+- Select a short and pronounceable title for the paper
+- Do not refer to papers by their target journal (e.g., "the Journal of Information Technology paper")
+
 ```
-git clone https://github.com/geritwagner/manuscript-template
+git clone https://github.com/geritwagner/paper-template
+# MANUALLY rename the folder using a short project title
 # remove the .git directory containing older versions
 rm -rf .git*
 # repo setup:
 git init
 # MANUALLY create paper (update titles etc.)
+mkdir analysis data figures output
 git add .
 git commit -m 'initial commit'
 # connect to git remote
@@ -110,6 +115,8 @@ ln -s ../templates
 ln -s ../bibliography
 # Build the Docker container
 docker build -t pandoc_dockerfile .
+# MANUALLY select a citation style by updating the link at the beginning of the Makefile
+# MANUALLY select templates for docx/tex by updating the link at the beginning of the Makefile
 ```
 
 3) Build the paper
@@ -128,9 +135,9 @@ Tutorials on git are available online ([1](https://learngitbranching.js.org/), [
 
 The [paper](paper.md) is written in markdown.
 Useful guides on markdown are available online ([1](https://bookdown.org/yihui/rmarkdown/), [2](https://bookdown.org/yihui/rmarkdown-cookbook/)).
-Several editors are available for markdown documents:
+Several editors are available for markdown documents, for example:
 
-- [Atom](https://shd101wyy.github.io/markdown-preview-enhanced/#/)
+- [Atom](https://shd101wyy.github.io/markdown-preview-enhanced/#/) with [markdown-preview-enhanced](https://github.com/shd101wyy/markdown-preview-enhanced)
 - [Panwriter](https://panwriter.com/)
 
 The bibliography is stored as a bib file and versioned in a git repository.
@@ -143,7 +150,7 @@ Changes in the bib-file should be checked before committing and adding {} to pro
 A very useful possibility is to include comments throughout the markdown document:
 
 ```
-<!-- This is a comment (adding further explanations, links to resources or parts of the papers that were shortened)-->
+<!-- Comment can be used to add further explanations, links to references/resources, or to keep parts of the paper that were shortened -->
 ```
 
 Papers are cited using the citation keys in the bib-file and the citation syntax @Webster2002 or [@Webster2002].
@@ -166,9 +173,9 @@ Further information on [pandoc-crossref](https://lierdakil.github.io/pandoc-cros
 ```
 
 To ensure compatibility with pandoc word and latex conversion, figures should be included as jpg/png.
-For the final versions, PDFs/EMFs should be included for Latex/Word respectively.
+For the final versions, vector graphics (PDF, EMF) should be included for Latex/Word respectively.
 
-Describe newline best-practice
+Formulas can be included as follows:
 
 $$ P_i(x) = \sum_i a_i x^i $$ {#eq:eqn1}
 
@@ -304,7 +311,7 @@ The checks should be completed in order (keep this in mind when updating this ch
 ### Template, formatting, and spell-checking
 
 - Used the correct template from the journal website? This might require an additional, external checklist.
-- Select and check citation style? [Search by example](https://csl.mendeley.com/searchByExample/)
+- Select and check citation style ([search by example](https://csl.mendeley.com/searchByExample/))
 
 - Check page limit
 - Spell-check (e.g., in Word)
