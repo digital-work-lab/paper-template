@@ -46,6 +46,7 @@ pdf:
 	$(PANDOC_CALL) \
 		paper.md \
 		--filter pandoc-crossref \
+		--filter pantable \
 		--citeproc \
 		$(BIBLIOGRAPHY_FILE) \
 		$(CSL_FILE) \
@@ -57,6 +58,7 @@ latex:
 	$(PANDOC_CALL) \
 		paper.md \
 		--filter pandoc-crossref \
+		--filter pantable \
 		--citeproc \
 		$(BIBLIOGRAPHY_FILE) \
 		$(CSL_FILE) \
@@ -69,6 +71,7 @@ docx:
 	$(PANDOC_CALL) \
 		paper.md \
 		--filter pandoc-crossref \
+		--filter pantable \
 		--citeproc \
 		$(BIBLIOGRAPHY_FILE) \
 		$(CSL_FILE) \
