@@ -8,3 +8,6 @@ paper.tex
 paper.aux
 paper.log
 paper.synctex.gz
+*.bib.sav
+*.bib.bak
+*.csv#

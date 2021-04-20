@@ -229,12 +229,12 @@ git commit -m 'address limitations [iss28]'
 - Create a single branch for issues that are related (e.g., group all issues referring to the introduction in the branch `update_introduction`).
 - Example:
 ```
-git checkout main
+git switch main
 git checkout -b iss12
 ```
 - While working locally on the iss12, rebase it on main when the main branch has been updated by coauthors (for better management of the history):
 ```
-git checkout iss12
+git switch iss12
 git rebase main
 ```
 - Once the branch is ready for review, revisions, and merging, share it:
@@ -246,12 +246,17 @@ git push iss12
 - Discuss, revise and merge on shared branches (github.com).
 - Merge when changes have been confirmed:
 ```
-git checkout main
+git switch main
 git merge --squash iss12
 git push
 ```
 
 ## Retrieving changes from coauthors
+
+- Check out remote branch:
+```
+git switch -c iss12 --track origin/iss12
+```
 
 - When your repository has local changes (commits): pull-rebase to avoid unnecessary merge commits:
 ```
@@ -322,6 +327,7 @@ The checks should be completed in order (keep this in mind when updating this ch
     - Consistent capitalization (headings, captions, ...)
     - Consistent terminology (e.g., paper vs. article)
     - Use the same decimal separator throughout the paper (. or ,)
+    - Consistently spell out numbers less than 10
 - Check tables and figures
     - Check references to figures, tables and appendices
     - Are your figures/tables self-contained? You should be able to read the article without looking at the figures/tables and vice versa.

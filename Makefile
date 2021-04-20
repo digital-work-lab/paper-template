@@ -24,8 +24,8 @@ help :
 	@echo "        Run all analyses"
 	@echo "    pdf"
 	@echo "        Generate paper pdf"
-	@echo "    pdf"
-	@echo "        Generate paper latex"
+	@echo "    latex"
+	@echo "        Generate paper tex"
 	@echo "    docx"
 	@echo "        Generate paper docx"
 
@@ -45,8 +45,8 @@ PANDOC_CALL = docker run --rm \
 pdf:
 	$(PANDOC_CALL) \
 		paper.md \
-		--filter pandoc-crossref \
 		--filter pantable \
+		--filter pandoc-crossref \
 		--citeproc \
 		$(BIBLIOGRAPHY_FILE) \
 		$(CSL_FILE) \
@@ -57,8 +57,8 @@ pdf:
 latex:
 	$(PANDOC_CALL) \
 		paper.md \
-		--filter pandoc-crossref \
 		--filter pantable \
+		--filter pandoc-crossref \
 		--citeproc \
 		$(BIBLIOGRAPHY_FILE) \
 		$(CSL_FILE) \
@@ -70,8 +70,8 @@ latex:
 docx:
 	$(PANDOC_CALL) \
 		paper.md \
-		--filter pandoc-crossref \
 		--filter pantable \
+		--filter pandoc-crossref \
 		--citeproc \
 		$(BIBLIOGRAPHY_FILE) \
 		$(CSL_FILE) \
