@@ -394,7 +394,7 @@ Upon submission, a PaperID is usually assigned by the submission system.
     - Create YYYY-MM-DD-JOURNAL_Revision_sheet_PaperID.pdf
     - Create YYYY-MM-DD-JOURNAL_Cover_letter_PaperID.pdf
     - Link in readme.md (# YYYY-MM-DD Submission to JournalX; [Manuscript](link-to-file))
-    - Create git-tag
+    - Create git-tag (e.g., icis2021-submission, icis2021-final-version, misq-revision1)
 - Analyses repository:
   - Tag git-repo (CHECK whether the data exactly matches the paper!, e.g., compare regression results)
   - Add specific version to Dockerfile (e.g., FROM rocker/tidyverse:3.4.3)
