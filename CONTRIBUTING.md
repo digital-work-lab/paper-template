@@ -94,6 +94,10 @@ git remote add origin https://github.com/....
 git branch -M main
 git push -u origin main
 # MANUALLY invite coauthors/provide access to the remote repository
+# git clone shared-bibliography-repository
+# git clone template-repository
+# git clone https://github.com/citation-style-language/styles
+# MANUALLY symlink the bibliography, templates and styles repos
 ```
 
 1b) Contribute to an existing repository
@@ -397,7 +401,7 @@ Upon submission, a PaperID is usually assigned by the submission system.
     - Create git-tag (e.g., icis2021-submission, icis2021-final-version, misq-revision1)
 - Analyses repository:
   - Tag git-repo (CHECK whether the data exactly matches the paper!, e.g., compare regression results)
-  - Add specific version to Dockerfile (e.g., FROM rocker/tidyverse:3.4.3)
+  - Add specific version to Dockerfile (e.g., FROM rocker/tidyverse:3.4.3) - generally avoid using the :latest tag
   - Build dockerfile (docker build .)
   - Run analyses in Dockerfile
   - Save python package versions (pip freeze > requirements.txt)

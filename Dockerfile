@@ -1,4 +1,4 @@
-FROM pandoc/ubuntu-latex:2.13
+FROM pandoc/ubuntu-latex:2.14
 RUN tlmgr update --self
 RUN tlmgr install gitinfo2
 RUN tlmgr install xstring
