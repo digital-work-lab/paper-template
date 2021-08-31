@@ -15,11 +15,11 @@ The goal is to support the collaborative writing process effectively, building o
   - [Publishing the paper](#publishing-the-paper)
 - [Principles](#principles)
 
-# Repository structure
+## Repository structure
 
 Based on [cookiecutter data science](https://drivendata.github.io/cookiecutter-data-science/).
 
-```
+```text
 ├── analysis      <- directory contains all scripts and corresponding
 │   │                Dockerfile(s) for the analyses
 │   └─ Makefile   <- contains instructions to run the analyses
@@ -51,37 +51,39 @@ Optional: shared and symlinked directories
 
 To avoid handling redundant and possibly outdated files across paper projects, it is recommended to use shared bibliographies, shared templates, and the styles provided by the CSL community.
 
-```
+```text
 ├── bibliography  <- a symlink to the shared bibliography
 ├── styles        <- a symlink to a local clone of the csl styles
 |                    https://github.com/citation-style-language/styles
 ├── templates     <- a symlink to the shared template repository
 ```
+
 Symlinks to shared directory are ignored in [git versioning](.gitignore).
 Any of the bibliographies (\*.bib), templates (\*.docx, \*.tex), or styles (\*.csl) can also be versioned in the individual paper repository.
 This can be accomplished by using the code in comments at the beginning of the [Makefile](Makefile).
 
-# Setup
+## Setup
 
 This section explains how to install the environment and build the paper.
 [Git](https://git-scm.com/), [Docker](https://www.docker.com/) and make are required.
 The following steps describe how to
 
-  - 1a. Create a new repository _or_
-  - 1b. Contribute to an existing repository,
-  - 2. Set up the paper production pipeline, and
-  - 3. Build the paper
+- 1. Set up the repository (create a new one or contribute to an existing one),
+- 2. Set up the paper production pipeline, and
+- 3. Build the paper
 
-1a) Create a new repository
+### 1: Set up the repository
+
+Option 1: Create a new repository
 
 - Select a short and pronounceable title for the paper
 - Do not refer to papers by their target journal (e.g., "the Journal of Information Technology paper")
 
-```
+```shell
 git clone https://github.com/geritwagner/paper-template
 # MANUALLY rename the folder using a short project title
-rm -rf .git
 # remove the .git directory containing older versions
+rm -rf .git
 # repo setup:
 git init
 # MANUALLY create paper (update titles etc.)
@@ -98,18 +100,20 @@ git push -u origin main
 # git clone template-repository
 # git clone https://github.com/citation-style-language/styles
 # MANUALLY symlink the bibliography, templates and styles repos
+pre-commit install
 ```
 
-1b) Contribute to an existing repository
+Option 2: Contribute to an existing repository
 
-```
+```shell
 # pull repository
 git clone https://...
+pre-commit install
 ```
 
-2) Set up the paper production pipeline
+### 2: Set up the paper production pipeline
 
-```
+```shell
 # MANUALLY set up the paths for the shared directories or clone them using the following commands:
 git clone https://github.com/geritwagner/bibliography ../bibliography
 git clone https://github.com/citation-style-language/styles ../styles
@@ -123,19 +127,19 @@ docker build -t pandoc_dockerfile .
 # MANUALLY select templates for docx/tex by updating the link at the beginning of the Makefile
 ```
 
-3) Build the paper
+### 3: Build the paper
 
-```
+```shell
 make pdf
 make docx
 ```
 
-# Workflow
+## Workflow
 
 Changes are tracked by the collaborative versioning system git.
 Tutorials on git are available online ([1](https://learngitbranching.js.org/), [2](https://github.com/jlord/git-it-electron)).
 
-## Editing the paper
+### Editing the paper
 
 The [paper](paper.md) is written in markdown.
 Useful guides on markdown are available online ([1](https://bookdown.org/yihui/rmarkdown/), [2](https://bookdown.org/yihui/rmarkdown-cookbook/)).
@@ -153,7 +157,7 @@ Changes in the bib-file should be checked before committing and adding {} to pro
 
 A very useful possibility is to include comments throughout the markdown document:
 
-```
+```markdown
 <!-- Comment can be used to add further explanations, links to references/resources, or to keep parts of the paper that were shortened -->
 ```
 
@@ -162,7 +166,7 @@ Groups of in-text citations should be sorted alphabetically (especially if a pre
 
 To add papers that are cited in the figure to the reference section, include the following in the YAML header of paper.md:
 
-```
+```markdown
 nocite: |
   @citation_key
 ```
@@ -172,7 +176,7 @@ Further Information on the [citation syntax](https://pandoc.org/MANUAL.html#cita
 Figures can be included as follows and referred to as @fig:distribution.
 Further information on [pandoc-crossref](https://lierdakil.github.io/pandoc-crossref/) is available online.
 
-```
+```markdown
 ![Figure Caption](figure.jpg){#fig:distribution width=300px}
 ```
 
@@ -212,7 +216,6 @@ Footnotes can be added [^1].
 
   [^1]: Example footnote.
 
-
 Formatting the bibliography (*.bib file)
 
 - Title field: use sentence case (e.g., "On the origin of species", not "On the Origin of Species"). CSL styles that require title case will use an automatic title-case conversion ([1](https://citationstyles.org/authors/#/titles-in-sentence-and-title-case)).
@@ -221,60 +224,71 @@ Formatting the bibliography (*.bib file)
 
 - Inproceedings: when using crossrefs (e.g., `crossref = {icis2010}`) for conference papers, the year and month field should _not_ be set, only the original \@Proceedings entry should include the date formatted as follows: `date    = {2015-12-13/2015-12-16}`.
 
-
-## Contributing changes
+### Contributing changes
 
 - Check the git-diff (gitk) before committing changes.
 - Use the following commit message format (do not start commit message with #3):
-```
+
+```shell
 git commit -m 'address limitations [iss28]'
 ```
+
 - Commit minor changes directly to the `polishing` branch, use dedicated branches otherwise (especially when changes need to be discussed in a pull-request).
 - Create a single branch for issues that are related (e.g., group all issues referring to the introduction in the branch `update_introduction`).
 - Example:
-```
+
+```shell
 git switch main
 git checkout -b iss12
 ```
+
 - While working locally on the iss12, rebase it on main when the main branch has been updated by coauthors (for better management of the history):
-```
+
+```shell
 git switch iss12
 git rebase main
 ```
+
 - Once the branch is ready for review, revisions, and merging, share it:
-```
+
+```shell
 git push iss12
 # set the upstream branch as suggested
 ```
+
 - Do not rebase shared branches while working on it.
 - Discuss, revise and merge on shared branches (github.com).
 - Merge when changes have been confirmed:
-```
+
+```shell
 git switch main
 git merge --squash iss12
 git push
 ```
 
-## Retrieving changes from coauthors
+### Retrieving changes from coauthors
 
 - Check out remote branch:
-```
+
+```shell
 git switch -c iss12 --track origin/iss12
 ```
 
 - When your repository has local changes (commits): pull-rebase to avoid unnecessary merge commits:
-```
+
+```shell
 git pull --rebase
 ```
 
 - When your repository has local changes (uncommitted): stash and pull-rebase:
-```
+
+```shell
 git stash
 git pull --rebase
 git stash apply
 ```
 
-## Collaboration with Word users
+### Collaboration with Word users
 
 Whenever possible, **ask active coauthors to modify the paper.md file**.
 
@@ -293,7 +307,7 @@ This can be useful to track the mapping between version numbers and the correspo
   - Other comments: address in individual commits (possibly including the comment-ids generated by the word-to-pdf export in the commit message)
   - Major issues: include in the readme.md (possibly discuss with coauthors) and address in a separate branch
 
-## Submitting the paper
+### Submitting the paper
 
 This checklist can be used to produce camera-ready papers (initials submissions, revisions, and final versions).
 The checks should be completed in order (keep this in mind when updating this checklist).
@@ -306,61 +320,61 @@ The checks should be completed in order (keep this in mind when updating this ch
 - If your article was a reject (or revise) and resubmit, did you clearly fix any concerns?
 - Check whether there is previous research in the target journal that can be cited.
 
-### Orga
+#### Orga
 
 - Check submission deadline
 
-### Clarity
+#### Clarity
 
 - Have any major conceptual changes/prominent phrases been changed recently?
 - Consistently use the same terminology (avoid synonyms) of conceptually relevant terms
 - Present major conceptual blocks in the same order (same numbering for hypotheses)
 
-### Up-to-date
+#### Up-to-date
 
- - Use latest statistics (e.g., including exclusion criteria)
- - Use latest model results
- - The variables in the background/methodology/results/discussion/intro/abstract/conclusion should be the same
+- Use latest statistics (e.g., including exclusion criteria)
+- Use latest model results
+- The variables in the background/methodology/results/discussion/intro/abstract/conclusion should be the same
 
-### Template, formatting, and spell-checking
+#### Template, formatting, and spell-checking
 
 - Used the correct template from the journal website? This might require an additional, external checklist.
 - Select and check citation style ([search by example](https://csl.mendeley.com/searchByExample/))
 
 - Check page limit
 - Spell-check (e.g., in Word)
-    - Check tempus (methodology: simple past)
-    - Check common mistakes (e.g., comma for which/who, i.e./e.g. should be in parentheses, using "an" before  vowel sounds, e.g., an hour but a horse)
-    - Remove double-spaces: ctrl+h in Word ([1](https://github.com/jgm/pandoc/issues/4790))
-    - Abbreviations introduced _and_ used consistently?
-    - Consistent capitalization (headings, captions, ...)
-    - Consistent terminology (e.g., paper vs. article)
-    - Use the same decimal separator throughout the paper (. or ,)
-    - Consistently spell out numbers less than 10
+  - Check tempus (methodology: simple past)
+  - Check common mistakes (e.g., comma for which/who, i.e./e.g. should be in parentheses, using "an" before  vowel sounds, e.g., an hour but a horse)
+  - Remove double-spaces: ctrl+h in Word ([1](https://github.com/jgm/pandoc/issues/4790))
+  - Abbreviations introduced _and_ used consistently?
+  - Consistent capitalization (headings, captions, ...)
+  - Consistent terminology (e.g., paper vs. article)
+  - Use the same decimal separator throughout the paper (. or ,)
+  - Consistently spell out numbers less than 10
 - Check tables and figures
-    - Check references to figures, tables and appendices
-    - Are your figures/tables self-contained? You should be able to read the article without looking at the figures/tables and vice versa.
-    - Tables:
-      - Check alignment of decimals
-      - Are table legends appropriate?
-      - Are tables embedded into the main text?
-      - Have tables been cited in the text?
-      - Do the citations refer to the CORRECT table/figure?
-      - For better alignment: adjust paragraph -> indentation, margin left/right.
-    - Figures:
-      - Alignment: Central in article with consistent margins inside the figure.
-      - Use the same font-type for the text and the figures.
-      - Use vector graphics.
-      - Figures should include searchable text (Word: emf/wmf vector graphics)
-      - For screenshots: include as PDF with OCR
-    - Check figures/tables and include references in the yaml header ([no cite](https://pandoc.org/MANUAL.html#including-uncited-items-in-the-bibliography))
+  - Check references to figures, tables and appendices
+  - Are your figures/tables self-contained? You should be able to read the article without looking at the figures/tables and vice versa.
+  - Tables:
+    - Check alignment of decimals
+    - Are table legends appropriate?
+    - Are tables embedded into the main text?
+    - Have tables been cited in the text?
+    - Do the citations refer to the CORRECT table/figure?
+    - For better alignment: adjust paragraph -> indentation, margin left/right.
+  - Figures:
+    - Alignment: Central in article with consistent margins inside the figure.
+    - Use the same font-type for the text and the figures.
+    - Use vector graphics.
+    - Figures should include searchable text (Word: emf/wmf vector graphics)
+    - For screenshots: include as PDF with OCR
+  - Check figures/tables and include references in the yaml header ([no cite](https://pandoc.org/MANUAL.html#including-uncited-items-in-the-bibliography))
 - Check references
-     - Go through reference list and check whether there are references that have been included accidentally (different topic)
-     - Bibliography: check whether all citations are in the bibliography
-     - Direct quotes should include a reference to the specific page
-     - Consistent use of "Anonymous" instead of clear author name (if blinding is required)
-     - Search paper for "reference" (to catch notes like ("reference needed"))
-     - Check in-text citations: correctly cited? separated by semicolons?
+  - Go through reference list and check whether there are references that have been included accidentally (different topic)
+  - Bibliography: check whether all citations are in the bibliography
+  - Direct quotes should include a reference to the specific page
+  - Consistent use of "Anonymous" instead of clear author name (if blinding is required)
+  - Search paper for "reference" (to catch notes like ("reference needed"))
+  - Check in-text citations: correctly cited? separated by semicolons?
 
 The following should not be necessary (when the word/latex reference documents work properly):
 
@@ -369,7 +383,7 @@ The following should not be necessary (when the word/latex reference documents w
 - Formatting of footnotes
 - Text-alignment/blocks (for all paragraphs)
 
-### Final checks
+#### Final checks
 
 - Make sure that the paper is anonymous (remove authors from [paper.md](paper.md) before creating the docx/pdf, [inspect word document for personal information](https://support.microsoft.com/en-us/topic/remove-hidden-data-and-personal-information-by-inspecting-documents-presentations-or-workbooks-356b7b5d-77af-44fe-a07f-9aa4d085966f))
 - Compare with previous version to catch accidental changes (Word: Check, Compare documents)
@@ -383,22 +397,21 @@ For the revision of conference papers:
 - Check and update metadata (authors, title, ...)
 - Latex: Check if .tex writes metadata to PDF (final version, not for submissions/revisions):
 
-```
+```latex
 \usepackage[pdftitle={Title of the paper}, pdfauthor={AuthorName FamilyName, AuthorName FamilyName}, pdfkeywords={keyword1, keyword2}]{hyperref}
 ```
 
-
-### Post-submission tasks:
+#### Post-submission tasks
 
 Upon submission, a PaperID is usually assigned by the submission system.
 
 - paper repository:
-    - Create YYYY-MM-DD-JOURNAL_Paper_PaperID.pdf
-    - Create YYYY-MM-DD-JOURNAL_Submission_proof_PaperID.pdf
-    - Create YYYY-MM-DD-JOURNAL_Revision_sheet_PaperID.pdf
-    - Create YYYY-MM-DD-JOURNAL_Cover_letter_PaperID.pdf
-    - Link in readme.md (# YYYY-MM-DD Submission to JournalX; [Manuscript](link-to-file))
-    - Create git-tag (e.g., icis2021-submission, icis2021-final-version, misq-revision1)
+  - Create YYYY-MM-DD-JOURNAL_Paper_PaperID.pdf
+  - Create YYYY-MM-DD-JOURNAL_Submission_proof_PaperID.pdf
+  - Create YYYY-MM-DD-JOURNAL_Revision_sheet_PaperID.pdf
+  - Create YYYY-MM-DD-JOURNAL_Cover_letter_PaperID.pdf
+  - Link in readme.md (# YYYY-MM-DD Submission to JournalX; [Manuscript](link-to-file))
+  - Create git-tag (e.g., icis2021-submission, icis2021-final-version, misq-revision1)
 - Analyses repository:
   - Tag git-repo (CHECK whether the data exactly matches the paper!, e.g., compare regression results)
   - Add specific version to Dockerfile (e.g., FROM rocker/tidyverse:3.4.3) - generally avoid using the :latest tag
@@ -414,11 +427,11 @@ Upon submission, a PaperID is usually assigned by the submission system.
 - Update personal paper portfolio
 - Thank co-authors/research-associates
 
-## Revising the paper
+### Revising the paper
 
 Useful resources for revising a paper are available online ([1](https://www.arunrai.net/s/EdComments_V43_I3-The-First-Revision-September-2019.pdf)).
 
-1. Organize revision
+#### 1 Organize revision
 
 - Track the deadline
 - Determine who will lead the revision
@@ -426,7 +439,7 @@ Useful resources for revising a paper are available online ([1](https://www.arun
 - Create local/personal revision directory (name: revision-id)
 - Plan proof-reading
 
-2. Create the revision sheet
+#### 2 Create the revision sheet
 
 - Add the review package to the paper directory (YYYY-MM-DD-Outlet-revision-id.pdf)
 - Create revision sheet, use [revision-sheet-generator](https://github.com/geritwagner/revision-sheet-generator)
@@ -443,12 +456,12 @@ Useful resources for revising a paper are available online ([1](https://www.arun
     - Major issues that are mentioned by multiple reviewers/editors are addressed in the same branch (possible approach: color-code the review according to the sections in which to address the comments)
     - Minor issues (e.g., fixing typos) are addressed in the polishing branch
 - After the table, provide a rough schedule, e.g.,
-    - Calendar week 4: iss_1, iss_5, iss_6
-    - Calendar week 5: iss_2, iss_3
-    - Calendar week 6: polishing, proof-reading, and pre-submission checks
+  - Calendar week 4: iss_1, iss_5, iss_6
+  - Calendar week 5: iss_2, iss_3
+  - Calendar week 6: polishing, proof-reading, and pre-submission checks
 - Start with the major comments and keep track of the deadline
 
-3. Address the comments
+#### 3 Address the comments
 
 - Assign coauthors to comments and track reviewing of changes
 - Address the feedback
@@ -463,14 +476,13 @@ Useful resources for revising a paper are available online ([1](https://www.arun
 - Run the [pre-submission checklist](#pre-submission-checks)
 - Update the running numbers in the revision sheet/tables (if they did not start with 1)
 
-4. Submit
-- Link submission documents in readme.md
+#### 4 Submit
 
+- Link submission documents in readme.md
 
 Example (copy and append at the end of readme.md)
 
-
-  # Journal: major revision
+  \# Journal: major revision
 
   [review package](YYYY-MM-DD-Revision-comments.pdf)
 
@@ -484,10 +496,10 @@ Example (copy and append at the end of readme.md)
   "1","INSERT_COMMENT","INSERT_RESPONSE"
 
   ```
+
   Submitted [paper](YYYY-MM-DD-Journal_Paper_PaperID.pdf) and [revision sheet](YYYY-MM-DD-Journal_Revision_sheet_PaperID.pdf).
 
-
-## Publishing the paper
+### Publishing the paper
 
 Proofreading of journal papers: include acknowledgments, funding etc. (see "For the revision of conference papers")
 
@@ -495,7 +507,7 @@ Proofreading of journal papers: include acknowledgments, funding etc. (see "For 
 - Add the publication record to your CV, [ORCID](https://orcid.org/), your [GoogleScholar](https://scholar.google.com/intl/de/scholar/citations.html) profile, institutional website, and personal website
 - Check whether/when the full-text PDF can be shared (create a reminder to publish it)
 
-# Principles
+## Principles
 
 This section summarizes underlying architectural principles and considerations.
 

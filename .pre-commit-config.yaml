@@ -1,0 +1,10 @@
+- repo: https://github.com/igorshubovych/markdownlint-cli
+  rev: v0.27.1
+  hooks:
+  - id: markdownlint
+- repo: git://github.com/trussworks/pre-commit-hooks
+  rev: v1.0.0
+  hooks:
+    - id: mdspell
+      files: 'paper.md'
+    - id: spelling-sort
