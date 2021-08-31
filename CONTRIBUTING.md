@@ -101,6 +101,11 @@ git push -u origin main
 # git clone https://github.com/citation-style-language/styles
 # MANUALLY symlink the bibliography, templates and styles repos
 pre-commit install
+cd .git/hooks
+cp ../../post-xxx-sample.txt post-checkout
+cp post-checkout post-merge
+cp post-checkout post-commit
+rm ../../post-xxx-sample.txt
 ```
 
 Option 2: Contribute to an existing repository
