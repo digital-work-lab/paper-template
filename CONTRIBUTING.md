@@ -80,8 +80,8 @@ The following steps describe how to
 ```
 git clone https://github.com/geritwagner/paper-template
 # MANUALLY rename the folder using a short project title
+rm -rf .git
 # remove the .git directory containing older versions
-rm -rf .git*
 # repo setup:
 git init
 # MANUALLY create paper (update titles etc.)
