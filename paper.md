@@ -4,7 +4,8 @@ author: "Author 1, Author 2, ..."
 project:
   abbreviation: short-title
   manuscriptrepository: https://github.com/...
-link-citations: false
+link-citations: yes
+linkcolor: blue
 figPrefix: "Figure"
 tblPrefix: "Table"
 ---
