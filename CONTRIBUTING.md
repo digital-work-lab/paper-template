@@ -510,7 +510,7 @@ Proofreading of journal papers: include acknowledgments, funding etc. (see "For 
 
 - Inform colleagues about the new publication
 - Add the publication record to your CV, [ORCID](https://orcid.org/), your [GoogleScholar](https://scholar.google.com/intl/de/scholar/citations.html) profile, institutional website, and personal website
-- Check whether/when the full-text PDF can be shared (create a reminder to publish it)
+- Check whether/when the full-text PDF can be shared (check journal embergo period, prepare accepted manuscript and create a reminder to publish it)
 
 ## Principles
 
