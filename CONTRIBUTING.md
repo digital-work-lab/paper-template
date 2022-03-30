@@ -49,17 +49,16 @@ Based on [cookiecutter data science](https://drivendata.github.io/cookiecutter-d
 
 Optional: shared and symlinked directories
 
-To avoid handling redundant and possibly outdated files across paper projects, it is recommended to use shared bibliographies, shared templates, and the styles provided by the CSL community.
+To avoid handling redundant and possibly outdated files across paper projects, it is recommended to use shared templates, and the styles provided by the CSL community.
 
 ```text
-├── bibliography  <- a symlink to the shared bibliography
 ├── styles        <- a symlink to a local clone of the csl styles
 |                    https://github.com/citation-style-language/styles
 ├── templates     <- a symlink to the shared template repository
 ```
 
 Symlinks to shared directory are ignored in [git versioning](.gitignore).
-Any of the bibliographies (\*.bib), templates (\*.docx, \*.tex), or styles (\*.csl) can also be versioned in the individual paper repository.
+Any of the templates (\*.docx, \*.tex), or styles (\*.csl) can also be versioned in the individual paper repository.
 This can be accomplished by using the code in comments at the beginning of the [Makefile](Makefile).
 
 ## Setup
@@ -96,10 +95,9 @@ git remote add origin https://github.com/....
 git branch -M main
 git push -u origin main
 # MANUALLY invite coauthors/provide access to the remote repository
-# git clone shared-bibliography-repository
 # git clone template-repository
 # git clone https://github.com/citation-style-language/styles
-# MANUALLY symlink the bibliography, templates and styles repos
+# MANUALLY symlink the templates and styles repos
 pre-commit install
 cd .git/hooks
 cp ../../post-xxx-sample.txt post-checkout
@@ -120,12 +118,10 @@ pre-commit install
 
 ```shell
 # MANUALLY set up the paths for the shared directories or clone them using the following commands:
-git clone https://github.com/geritwagner/bibliography ../bibliography
 git clone https://github.com/citation-style-language/styles ../styles
 git clone https://github.com/geritwagner/templates ../templates
 ln -s ../styles
 ln -s ../templates
-ln -s ../bibliography
 # Build the Docker container
 docker build -t pandoc_dockerfile .
 # MANUALLY select a citation style by updating the link at the beginning of the Makefile
@@ -153,7 +149,7 @@ Several editors are available for markdown documents, for example:
 - [Atom](https://shd101wyy.github.io/markdown-preview-enhanced/#/) with [markdown-preview-enhanced](https://github.com/shd101wyy/markdown-preview-enhanced)
 - [Panwriter](https://panwriter.com/)
 
-The bibliography is stored as a bib file and versioned in a git repository.
+The bibliography is stored as a bib file and versioned by git.
 It can be edited using tools like [JabRef](https://github.com/JabRef/jabref).
 It is recommended to configure save actions to [store titles as sentence case](https://docs.jabref.org/finding-sorting-and-cleaning-entries/saveactions#sentence-case), [normalize names of persons for author fields](https://docs.jabref.org/finding-sorting-and-cleaning-entries/saveactions#normalize-names-of-persons), and to [normalize page numbers](https://docs.jabref.org/finding-sorting-and-cleaning-entries/saveactions#normalize-page-numbers).
 Changes in the bib-file should be checked before committing and adding {} to protect cases when necessary (e.g., `{J}ab{R}ef`).

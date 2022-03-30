@@ -5,8 +5,7 @@ LATEX_REF_DOC = --template /templates/basic.tex
 # LATEX_REF_DOC = --template basic.tex
 CSL_FILE = --csl /styles/mis-quarterly.csl
 # CSL_FILE = --csl mis-quarterly.csl
-BIBLIOGRAPHY_FILE = --bibliography /bibliography/references.bib
-# BIBLIOGRAPHY_FILE = --bibliography references.bib
+BIBLIOGRAPHY_FILE = --bibliography references.bib
 
 # The parameters should be in the same document (ideally in the YAML header of paper.md).
 # We will keep them in the Makefile until template and reference-doc can be set in the YAML header.
@@ -38,7 +37,6 @@ PANDOC_CALL = docker run --rm \
 	--volume "`pwd`:/data" \
 	--volume "$(shell readlink -f ./styles)":/styles/ \
 	--volume "$(shell readlink -f ./templates)":/templates/ \
-	--volume "$(shell readlink -f ./bibliography)":/bibliography/ \
 	--user `id -u`:`id -g` \
 	pandoc_dockerfile
 
