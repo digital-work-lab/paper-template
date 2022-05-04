@@ -178,7 +178,7 @@ Figures can be included as follows and referred to as @fig:distribution.
 Further information on [pandoc-crossref](https://lierdakil.github.io/pandoc-crossref/) is available online.
 
 ```markdown
-![Figure Caption](figure.jpg){#fig:distribution width=300px}
+![Figure Caption](figures/figure.jpg){#fig:distribution width=300px}
 ```
 
 To ensure compatibility with pandoc word and latex conversion, figures should be included as jpg/png.

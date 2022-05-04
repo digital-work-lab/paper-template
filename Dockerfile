@@ -1,4 +1,5 @@
-FROM pandoc/ubuntu-latex:2.16
+FROM pandoc/ubuntu-latex:2.16.2
+RUN tlmgr option repository ftp://tug.org/historic/systems/texlive/2021/tlnet-final
 RUN tlmgr update --self
 RUN tlmgr install gitinfo2
 RUN tlmgr install xstring
