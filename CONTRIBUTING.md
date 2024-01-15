@@ -104,6 +104,7 @@ cp ../../post-xxx-sample.txt post-checkout
 cp post-checkout post-merge
 cp post-checkout post-commit
 rm ../../post-xxx-sample.txt
+cd ../..
 ```
 
 Option 2: Contribute to an existing repository
