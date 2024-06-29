@@ -79,7 +79,7 @@ Option 1: Create a new repository
 - Do not refer to papers by their target journal (e.g., "the Journal of Information Technology paper")
 
 ```shell
-git clone https://github.com/geritwagner/paper-template
+git clone git@github.com:digital-work-lab/paper-template.git
 # MANUALLY rename the folder using a short project title
 # remove the .git directory containing older versions
 rm -rf .git
@@ -87,8 +87,16 @@ rm -rf .git
 git init
 # MANUALLY create paper (update titles etc.)
 mkdir analysis data figures output
+pre-commit install
+cd .git/hooks
+cp ../../post-xxx-sample.txt post-checkout
+cp post-checkout post-merge
+cp post-checkout post-commit
+rm ../../post-xxx-sample.txt
+cd ../..
 git add .
 git commit -m 'initial commit'
+make pdf
 # connect to git remote
 # MANUALLY update url in the following line
 git remote add origin https://github.com/....
@@ -98,13 +106,6 @@ git push -u origin main
 # git clone template-repository
 # git clone https://github.com/citation-style-language/styles
 # MANUALLY symlink the templates and styles repos
-pre-commit install
-cd .git/hooks
-cp ../../post-xxx-sample.txt post-checkout
-cp post-checkout post-merge
-cp post-checkout post-commit
-rm ../../post-xxx-sample.txt
-cd ../..
 ```
 
 Option 2: Contribute to an existing repository
@@ -119,8 +120,8 @@ pre-commit install
 
 ```shell
 # MANUALLY set up the paths for the shared directories or clone them using the following commands:
-git clone https://github.com/citation-style-language/styles ../styles
-git clone https://github.com/geritwagner/templates ../templates
+git clone git@github.com:citation-style-language/styles.git ../styles
+git clone git@github.com:digital-work-lab/templates.git ../templates
 ln -s ../styles
 ln -s ../templates
 # Build the Docker container
