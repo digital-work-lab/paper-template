@@ -1,9 +1,9 @@
 # To use local instead of shared versions, replace the following and use the code in comments
-DOCX_REFERENCE_DOC = --reference-doc /templates/ICIS2021.docx
+DOCX_REFERENCE_DOC = --reference-doc ICIS2021.docx
 # DOCX_REFERENCE_DOC = --reference-doc APA-7.docx
-LATEX_REF_DOC = --template /templates/basic.tex
+LATEX_REF_DOC = --template basic.tex
 # LATEX_REF_DOC = --template basic.tex
-CSL_FILE = --csl /styles/mis-quarterly.csl
+CSL_FILE = --csl apa.csl
 # CSL_FILE = --csl mis-quarterly.csl
 BIBLIOGRAPHY_FILE = --bibliography references.bib
 
@@ -35,8 +35,6 @@ analyses:
 
 PANDOC_CALL = docker run --rm \
 	--volume "`pwd`:/data" \
-	--volume "$(shell readlink -f ./styles)":/styles/ \
-	--volume "$(shell readlink -f ./templates)":/templates/ \
 	--user `id -u`:`id -g` \
 	pandoc_dockerfile
 
