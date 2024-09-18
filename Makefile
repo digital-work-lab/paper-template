@@ -73,3 +73,6 @@ docx:
 		$(CSL_FILE) \
 		$(DOCX_REFERENCE_DOC) \
 		--output paper.docx
+
+docker:
+	docker build -t pandoc_dockerfile .
