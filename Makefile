@@ -30,6 +30,9 @@ help :
 
 run : analyses pdf latex docx
 
+build:
+	docker build -t pandoc_dockerfile .
+
 analyses:
 	[ -f analysis/Makefile ] && $(MAKE) -C analysis run || true # Skip if no Makefile in analysis directory
 
