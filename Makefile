@@ -44,9 +44,9 @@ PANDOC_CALL = docker run --rm \
 pdf:
 	$(PANDOC_CALL) \
 		paper.md \
-		--citeproc \
 		--filter pantable \
 		--filter pandoc-crossref \
+		--citeproc \
 		$(BIBLIOGRAPHY_FILE) \
 		$(CSL_FILE) \
 		$(LATEX_REF_DOC) \
