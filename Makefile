@@ -1,5 +1,5 @@
 # To use local instead of shared versions, replace the following and use the code in comments
-DOCX_REFERENCE_DOC = --reference-doc ICIS2021.docx
+DOCX_REFERENCE_DOC = --reference-doc APA-7.docx
 # DOCX_REFERENCE_DOC = --reference-doc APA-7.docx
 LATEX_REF_DOC = --template basic.tex
 # LATEX_REF_DOC = --template basic.tex
