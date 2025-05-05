@@ -11,12 +11,14 @@ BIBLIOGRAPHY_FILE = --bibliography references.bib
 # We will keep them in the Makefile until template and reference-doc can be set in the YAML header.
 # https://github.com/jgm/pandoc/issues/4627
 
-.PHONY : run analyses pdf latex docx
+.PHONY : build run analyses pdf latex docx
 
 help :
 	@echo "Usage: make [command]"
 	@echo "    help"
 	@echo "        Show this help description"
+	@echo "    build"
+	@echo "        Build the docker image pandoc_dockerfile"
 	@echo "    run"
 	@echo "        Run analyses of the complete repository"
 	@echo "    analyses"
