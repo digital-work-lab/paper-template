@@ -12,6 +12,8 @@ link-citations: true
 linkcolor: blue
 figPrefix: Figure
 tblPrefix: Table
+header-includes:
+- \usepackage{soul}
 ---
 
 **_Abstract_**
@@ -31,3 +33,7 @@ tblPrefix: Table
 # Conclusion
 
 # References
+
+<!--
+\hl{Highlights}
+-->
