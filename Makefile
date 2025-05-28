@@ -41,7 +41,8 @@ analyses:
 PANDOC_CALL = docker run --rm \
 	--volume "`pwd`:/data" \
 	--user `id -u`:`id -g` \
-	pandoc_dockerfile
+	pandoc_dockerfile \
+	--verbose
 
 pdf:
 	$(PANDOC_CALL) \
