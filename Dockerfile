@@ -1,5 +1,6 @@
-FROM pandoc/latex:3.6-ubuntu
-RUN tlmgr option repository https://mirror.ctan.org/systems/texlive/tlnet
+# Note: when updating pandoc/latex, make sure it builds locally and on Codespaces
+FROM pandoc/latex:3.7-ubuntu
+
 RUN tlmgr update --self
 RUN tlmgr install gitinfo2
 RUN tlmgr install xstring
