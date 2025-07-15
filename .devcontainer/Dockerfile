@@ -23,6 +23,8 @@ RUN useradd -m vscode -G docker || usermod -aG docker vscode # Add vscode user o
 COPY dockerfile_entrypoint.sh /usr/local/bin/dockerfile_entrypoint.sh
 RUN chmod +x /usr/local/bin/dockerfile_entrypoint.sh
 
+# Install labot from GitHub
+RUN pip install git+https://github.com/digital-work-lab/labot.git
 
 # Use the dockerfile_entrypoint.sh script as an entry point to adjust the docker group ID at runtime
 ENTRYPOINT ["/usr/local/bin/dockerfile_entrypoint.sh"]
